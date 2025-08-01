@@ -12,20 +12,20 @@ function App() {
   const [isSecondQuestion, setIsSecondQuestion] = useState(false);
   const noButtonRef = useRef(null);
 
-  // Stars positions fixed after first render
-  const [starsPositions] = useState(
-    () =>
-      Array.from({ length: 80 }).map(() => ({
-        top: Math.random() * window.innerHeight,
-        left: Math.random() * window.innerWidth,
-        duration: 2 + Math.random() * 2,
-      }))
+  const [starsPositions] = useState(() =>
+    Array.from({ length: 80 }).map(() => ({
+      top: Math.random() * window.innerHeight,
+      left: Math.random() * window.innerWidth,
+      duration: 2 + Math.random() * 2,
+    }))
   );
 
   useEffect(() => {
     const audio = new Audio("/love.mp3");
     audio.loop = true;
-    audio.play().catch(() => {});
+    setTimeout(() => {
+    audio.play().catch((e) => console.log("Audio error:", e));
+  }, 1000);
   }, []);
 
   const handleYes = () => {
@@ -37,7 +37,7 @@ function App() {
     const btn = noButtonRef.current;
     if (!isSecondQuestion) {
       if (btn) {
-        btn.classList.add("fade-text"); // fade only button on click
+        btn.classList.add("fade-text");
         setTimeout(() => {
           btn.classList.remove("fade-text");
           setMessage(messages[0]);
@@ -112,12 +112,7 @@ function App() {
           to { opacity: 1; }
         }
         .letter-popup {
-          animation: floatIn 3s ease-in-out forwards;
-          animation-fill-mode: forwards;
-          animation-iteration-count: infinite;
-          animation-name: floating;
-          animation-duration: 3s;
-          animation-timing-function: ease-in-out;
+          animation: floatIn 3s ease-in-out forwards, floating 3s ease-in-out infinite;
         }
         @keyframes floatIn {
           from {
@@ -137,37 +132,36 @@ function App() {
             transform: translateY(-12px);
           }
         }
-        dialog-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  .letter-dialog {
-    background: #ffffffdd;
-    border: 2px solid #ccc;
-    border-radius: 20px;
-    padding: 2rem;
-    max-width: 90vw;
-    max-height: 80vh;      /* limit height */
-    overflow-y: auto;      /* enable vertical scroll */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    width: 400px;          /* desktop default width */
-    box-sizing: border-box; /* include padding in width */
-  }
-  @media (max-width: 480px) {
-    .letter-dialog {
-      width: 90vw;         /* smaller width on mobile */
-      max-height: 70vh;    /* smaller height on mobile */
-    }
-  }
-
+        .dialog-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.6);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        .letter-dialog {
+          background: #ffffffdd;
+          border: 2px solid #ccc;
+          border-radius: 20px;
+          padding: 2rem;
+          max-width: 90vw;
+          max-height: 80vh;
+          overflow-y: auto;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          width: 400px;
+          box-sizing: border-box;
+        }
+        @media (max-width: 480px) {
+          .letter-dialog {
+            width: 90vw;
+            max-height: 70vh;
+          }
+        }
         .fade-text {
           animation: fadeText 2.2s ease-in-out forwards;
         }
@@ -211,48 +205,25 @@ function App() {
             {!isSecondQuestion && (
               <>
                 <button style={styles.yesButton} onClick={handleYes}>Yes</button>
-                <button
-                  ref={noButtonRef}
-                  onClick={handleNo}
-                  onMouseEnter={undefined}
-                  onTouchStart={undefined}
-                  style={{
-                    ...styles.noButton,
-                    position: clickCount > 0 ? "absolute" : "relative"
-                  }}
-                >
-                  No
-                </button>
+                <button ref={noButtonRef} onClick={handleNo} style={{ ...styles.noButton, position: clickCount > 0 ? "absolute" : "relative" }}>No</button>
               </>
             )}
             {isSecondQuestion && (
-              <button
-                ref={noButtonRef}
-                onClick={handleNo}
-                style={{
-                  ...styles.noButton
-                }}
-              >
-                No
-              </button>
+              <button ref={noButtonRef} onClick={handleNo} style={styles.noButton}>No</button>
             )}
           </div>
         </div>
       ) : (
         <div style={styles.centeredText}>
           <h1 className="fade-in" style={styles.heading}>
-            You said yes?! I was about to write a sad poem and adopt a cat named after you... 😭<br />
-            Just know… I missed you more than the sun misses the moon 🌑 Priya 🤍
+            You said yes?! I was about to write a sad poem... 😭<br />
+            I missed you more than the sun misses the moon 🌑 Priya 🤍
           </h1>
         </div>
       )}
 
       {showLetter && !showLetterDialog && (
-        <button
-          className="letter-popup"
-          style={styles.letterButton}
-          onClick={openLetterDialog}
-        >
+        <button className="letter-popup" style={styles.letterButton} onClick={openLetterDialog}>
           Anish has a letter for you 🤍
         </button>
       )}
@@ -261,8 +232,7 @@ function App() {
         <div className="dialog-background">
           <div className="letter-dialog">
             <h2 style={styles.letterHeading}>Anish has a letter for you 🤍</h2>
-            <p style={styles.letter}>
-              Hey Priya 🤍,<br /><br />
+            <p style={styles.letter}> Hey Priya 🤍,<br /><br />
               There’s something I’ve been meaning to say, and I don’t want to keep it in anymore.<br />
               I miss you. Not in a dramatic way, but in a quiet, deep way. Like how silence feels after your favorite song ends too soon. I don’t know if you think about me these days, but you never really left my mind.<br />
               Please don’t walk away from me, not with distance, not with your thoughts. I don’t need everything to be perfect. I just want you to stay, even if it’s a little messy. Even if the truth is hard sometimes, I’d rather hear that than be left guessing.<br />
@@ -272,7 +242,7 @@ function App() {
               Take all the time you need. Just know that someone out here still cares. Deeply.<br /><br />
               With all my heart,<br />
               ~ Anish
-            </p>
+              </p>
           </div>
         </div>
       )}
@@ -343,7 +313,7 @@ const styles = {
     animationDuration: "3s",
     animationIterationCount: "infinite",
     animationTimingFunction: "ease-in-out",
-    animationDirection: "alternate",
+    animationDirection: "alternate"
   },
   paragraph: {
     color: "#eee",
@@ -365,4 +335,5 @@ const styles = {
 
 const root = createRoot(document.getElementById("root"));
 root.render(<App />);
+
 export default App;
