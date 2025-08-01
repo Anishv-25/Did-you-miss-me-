@@ -252,12 +252,12 @@ function App() {
             <h2 style={styles.letterHeading}>Anish has a letter for you 🤍</h2>
             <p style={styles.letter}>
               Hey Priya 🤍,<br /><br />
-              There’s something I’ve been meaning to say, and I don’t want to keep it in anymore.<br /><br />
-              I miss you. Not in a dramatic way, but in a quiet, deep way. Like how silence feels after your favorite song ends too soon. I don’t know if you think about me these days, but you never really left my mind.<br /><br />
-              Please don’t walk away from me, not with distance, not with your thoughts. I don’t need everything to be perfect. I just want you to stay, even if it’s a little messy. Even if the truth is hard sometimes, I’d rather hear that than be left guessing.<br /><br />
-              I don’t think you know how much you mean to me. The little things, like how you smile hard to hide your tears, the way your eyes look when you’re thinking hard and how you speak when you’re tired, I notice them all. Maybe more than I should. And I want to know the side of you that you hide. The soft, quiet, real part. You don’t have to be strong all the time. Not with me.<br /><br />
-              You don’t need to keep me safe by pushing me away. I’m not afraid of the real you. I don’t want perfect. I want true. I want to stay, even when it’s heavy.<br /><br />
-              And if I ever held your hand again, I think I’d understand why everything I went through led me to you.<br /><br />
+              There’s something I’ve been meaning to say, and I don’t want to keep it in anymore.<br />
+              I miss you. Not in a dramatic way, but in a quiet, deep way. Like how silence feels after your favorite song ends too soon. I don’t know if you think about me these days, but you never really left my mind.<br />
+              Please don’t walk away from me, not with distance, not with your thoughts. I don’t need everything to be perfect. I just want you to stay, even if it’s a little messy. Even if the truth is hard sometimes, I’d rather hear that than be left guessing.<br />
+              I don’t think you know how much you mean to me. The little things, like how you smile hard to hide your tears, the way your eyes look when you’re thinking hard and how you speak when you’re tired, I notice them all. Maybe more than I should. And I want to know the side of you that you hide. The soft, quiet, real part. You don’t have to be strong all the time. Not with me.<br />
+              You don’t need to keep me safe by pushing me away. I’m not afraid of the real you. I don’t want perfect. I want true. I want to stay, even when it’s heavy.<br />
+              And if I ever held your hand again, I think I’d understand why everything I went through led me to you.<br />
               Take all the time you need. Just know that someone out here still cares. Deeply.<br /><br />
               With all my heart,<br />
               ~ Anish
