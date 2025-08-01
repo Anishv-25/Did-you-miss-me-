@@ -137,26 +137,37 @@ function App() {
             transform: translateY(-12px);
           }
         }
-        .dialog-background {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(0, 0, 0, 0.6);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
-        .letter-dialog {
-          background: #ffffffdd;
-          border: 2px solid #ccc;
-          border-radius: 20px;
-          padding: 2rem;
-          max-width: 90%;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+        dialog-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .letter-dialog {
+    background: #ffffffdd;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 90vw;
+    max-height: 80vh;      /* limit height */
+    overflow-y: auto;      /* enable vertical scroll */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    width: 400px;          /* desktop default width */
+    box-sizing: border-box; /* include padding in width */
+  }
+  @media (max-width: 480px) {
+    .letter-dialog {
+      width: 90vw;         /* smaller width on mobile */
+      max-height: 70vh;    /* smaller height on mobile */
+    }
+  }
+
         .fade-text {
           animation: fadeText 2.2s ease-in-out forwards;
         }
